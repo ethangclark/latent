@@ -58,9 +58,25 @@ async function main() {
   const repoRepresentation = await getRepoRepresentation();
   const prompt = `Following is the code used to generate this prompt:
 
-  ${repoRepresentation}
+BEGIN REPO REPRESENTATION
 
-  My goal is to augment this code until it is capable of working as a fully-automated software engineer. What is the single biggest obstacle that's preventing me from achieving my goal?`;
+${repoRepresentation}
+
+END REPO REPRESENTATION
+
+My fantasy is for this code to be capable of operating as a fully-autonmous remote worker that is capable of any type of remote work.
+
+My actual goal is for this code to be capable of operating as a fully-autonomous (and provably-competent) remote worker in all types of remote works that are possible given 1) the base models it leverages and 2) state-of-the-art prompt engineering.
+
+My strategy is to augment this code until it is capable of autonomously enhancing itself towards acheivement of my goal.
+
+Please do the following:
+
+1. Discuss the challenges I will face in implementing my strategy
+2. Select the single challenge that faces the gravest existential threat to achieving my goal
+3. Propose a solution for overcoming that challenge
+4. Provide concrete implementation details (e.g. code, data, etc.) for your proposed solution
+5. Select one piece of your proposed solution that you think would make a nice, small, easy-to-digest, easy-to-approve, standalone PR that would both meaningfully improve existing functionality and move it towards a final solution. Provide all the code for this PR.`;
   console.log(prompt);
   console.log("\n~~~~~~!!!!~~~~~\n");
   const response = await getResponseFromSonnet([prompt]);
