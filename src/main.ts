@@ -1,17 +1,8 @@
-import { getResponseFromO1Preview } from "./openAi";
 import * as fs from "fs";
 import * as path from "path";
+import { getResponseFromSonnet } from "./anthropic";
 
 const filesToExclude = ["node_modules", "yarn.lock"];
-
-async function readFileContent(filePath: string): Promise<string> {
-  try {
-    return await fs.promises.readFile(filePath, "utf8");
-  } catch (error) {
-    console.error(`Error reading file ${filePath}:`, error);
-    return "";
-  }
-}
 
 async function getRepoRepresentation(): Promise<string> {
   const representation: string[] = [];
@@ -41,7 +32,7 @@ async function getRepoRepresentation(): Promise<string> {
         representation.push(`${indent}📁 ${entry.name}/`);
         await scanDirectory(fullPath, indent + "  ");
       } else {
-        const content = await readFileContent(fullPath);
+        const content = await fs.promises.readFile(fullPath, "utf8");
         representation.push(`${indent}📄 ${entry.name}:`);
         representation.push(`${indent}${"─".repeat(entry.name.length + 2)}`);
         representation.push(
@@ -50,7 +41,6 @@ async function getRepoRepresentation(): Promise<string> {
             .map((line) => `${indent}  ${line}`)
             .join("\n")
         );
-        representation.push(""); // Empty line for readability
       }
     }
   }
@@ -73,7 +63,7 @@ async function main() {
   My goal is to augment this code until it is capable of working as a fully-automated software engineer. What is the single biggest obstacle that's preventing me from achieving my goal?`;
   console.log(prompt);
   console.log("\n~~~~~~!!!!~~~~~\n");
-  const response = await getResponseFromO1Preview([prompt]);
+  const response = await getResponseFromSonnet([prompt]);
   console.log(response);
 }
 
