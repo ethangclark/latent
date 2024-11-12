@@ -4,7 +4,7 @@ import { getResponseFromO1Preview } from "./openAi";
 
 const filesToExclude = ["node_modules", "yarn.lock"];
 
-async function getRepoRepresentation(): Promise<string> {
+export async function getRepoRepresentation(): Promise<string> {
   const representation: string[] = [];
 
   async function scanDirectory(
@@ -83,4 +83,6 @@ Please do the following:
   console.log(response);
 }
 
-main();
+if (process.env.NODE_ENV !== "test") {
+  main();
+}

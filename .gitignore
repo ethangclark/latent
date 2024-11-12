@@ -2,8 +2,7 @@
 /node_modules
 
 # debug
-yarn-debug.log*
-yarn-error.log*
+npm-debug.log*
 
 # local env files
 .env
