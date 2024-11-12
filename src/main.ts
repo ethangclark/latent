@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
-import { getResponseFromSonnet } from "./anthropic";
+import { getResponseFromO1Preview } from "./openAi";
 
 const filesToExclude = ["node_modules", "yarn.lock"];
 
@@ -78,8 +78,8 @@ Please do the following:
 4. Provide concrete implementation details (e.g. code, data, etc.) for your proposed solution
 5. Select one piece of your proposed solution that you think would make a nice, small, easy-to-digest, easy-to-approve, standalone PR that would both meaningfully improve existing functionality and move it towards a final solution. Provide all the code for this PR.`;
   console.log(prompt);
-  console.log("\n~~~~~~!!!!~~~~~\n");
-  const response = await getResponseFromSonnet([prompt]);
+  console.log("\n~~~~~!!!!!~~~~~\n");
+  const response = await getResponseFromO1Preview([prompt]);
   console.log(response);
 }
 
